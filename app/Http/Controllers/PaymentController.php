@@ -21,36 +21,36 @@ class PaymentController extends Controller
 {
     use Payments;
 
-    public function index(Request $request)
-    {
-        $payments = Auth::user()->payments()
-            ->when($request->search, function ($query, $search) {
-                $query->where('receipt', 'like', "%{$search}%")
-                    ->orWhere('phone', 'like', "%{$search}%")
-                    ->orWhere('amount', 'like', "%{$search}%");
-            })
-            ->latest()
-            ->paginate(10)
-            ->withQueryString()
-            ->through(function ($payment) {
-                return [
-                    'id' => $payment->id,
-                    'phone' => $payment->phone,
-                    'amount' => $payment->amount,
-                    'created_at' => $payment->created_at,
-                ];
-            });
+    // public function index(Request $request)
+    // {
+    //     $payments = Auth::user()->payments()
+    //         ->when($request->search, function ($query, $search) {
+    //             $query->where('receipt', 'like', "%{$search}%")
+    //                 ->orWhere('phone', 'like', "%{$search}%")
+    //                 ->orWhere('amount', 'like', "%{$search}%");
+    //         })
+    //         ->latest()
+    //         ->paginate(10)
+    //         ->withQueryString()
+    //         ->through(function ($payment) {
+    //             return [
+    //                 'id' => $payment->id,
+    //                 'phone' => $payment->phone,
+    //                 'amount' => $payment->amount,
+    //                 'created_at' => $payment->created_at,
+    //             ];
+    //         });
 
-        return Inertia::render('Payments/Index', [
-            'payments' => $payments,
-            'filters' => $request->only(['search']),
-        ]);
-    }
+    //     return Inertia::render('Payments/Index', [
+    //         'payments' => $payments,
+    //         'filters' => $request->only(['search']),
+    //     ]);
+    // }
 
-    public function create()
-    {
-        return Inertia::render('Payments/Create');
-    }
+    // public function create()
+    // {
+    //     return Inertia::render('Payments/Create');
+    // }
 
     public function store(Request $request)
     {
