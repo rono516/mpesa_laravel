@@ -22,9 +22,9 @@ trait Payments
         $businessShortCode = config('mpesa.shortCode');
         $lipaNaMpesaPasskey = config('mpesa.passKey');
         $transactionType = 'CustomerPayBillOnline';
-        $partyB = config('africastalking.paybill');
+        $partyB = 174379;
         $callBackURL = config('mpesa.callbackURL');
-        $accountReference = config('africastalking.account');
+        $accountReference = $phone;
         $transactionDesc = 'Buying credit using '.$phone.' in '.config('app.name');
         $remarks = '';
 
