@@ -52,6 +52,13 @@ class PaymentController extends Controller
     //     return Inertia::render('Payments/Create');
     // }
 
+    public function mpesa_view(){
+        $user = Auth::user();
+        return view('mpesa')->with([
+            'user' => $user
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validData = $request->validate([
