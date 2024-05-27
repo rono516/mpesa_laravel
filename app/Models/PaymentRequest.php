@@ -17,4 +17,9 @@ class PaymentRequest extends Model
         'merchant',
         'checkout',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

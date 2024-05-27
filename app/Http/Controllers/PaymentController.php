@@ -79,10 +79,10 @@ class PaymentController extends Controller
                     'checkout' => $response->checkout,
                 ]);
 
-                return redirect()->route('credit.index')->with('status', [
-                    'type' => 'alert-info',
-                    'message' => 'Waiting for KES ' . $validData['amount'] . ' payment from ' . $validData['phone'] . '.',
-                ]);
+                // return redirect()->route('credit.index')->with('status', [
+                //     'type' => 'alert-info',
+                //     'message' => 'Waiting for KES ' . $validData['amount'] . ' payment from ' . $validData['phone'] . '.',
+                // ]);
             } catch (Exception $ex) {
                 Log::error($ex);
 
@@ -121,7 +121,7 @@ class PaymentController extends Controller
                     } else {
                         $user = User::findOrFail($paymentRequest->user_id);
 
-                        $savedPayment = DB::transaction(function () use ($user, $meta, $paymentRequest) {
+                        DB::transaction(function () use ($user, $meta, $paymentRequest) {
                             $payment = $user->payments()->create([
                                 'merchant' => $meta['merchantRequestID'],
                                 'checkout' => $meta['checkoutRequestID'],
@@ -131,23 +131,23 @@ class PaymentController extends Controller
                                 'date' => $meta['transactionDate'],
                             ]);
 
-                            $user->update([
-                                'credit' => $user->credit + $meta['amount'],
-                                'credit_updated_at' => now(),
-                            ]);
+                            // $user->update([
+                            //     'credit' => $user->credit + $meta['amount'],
+                            //     'credit_updated_at' => now(),
+                            // ]);
 
                             $paymentRequest->delete();
 
-                            MpesaCallbackSaved::dispatch($user, $payment);
+                            // MpesaCallbackSaved::dispatch($user, $payment);
 
                             return $payment;
                         });
 
                         // Clear cached dashboard stats
-                        Cache::forget($user->uuid . '-creditUtilizationStats');
+                        // Cache::forget($user->uuid . '-creditUtilizationStats');
 
-                        Notification::route('slack', config('slack.notableEventWebhook'))
-                            ->notify(new NewPaymentReceived($user, $savedPayment));
+                        // Notification::route('slack', config('slack.notableEventWebhook'))
+                        //     ->notify(new NewPaymentReceived($user, $savedPayment));
                     }
                 } catch (Exception $ex) {
                     Log::error($ex);

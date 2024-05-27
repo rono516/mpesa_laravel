@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('payment_requests', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('phone');
+            $table->double('amount', 10, 2);
+            $table->string('merchant')->unique();
+            $table->string('checkout')->unique();
+            // $table->timestamp('created_at');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
