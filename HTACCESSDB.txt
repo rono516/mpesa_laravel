@@ -13,3 +13,7 @@ RewriteRule ^(.*)$ public/$1 [L]
 DB_DATABASE=mogullte_mpesa
 DB_USERNAME=mogullte_mpesa
 DB_PASSWORD=mogullte_mpesa
+
+DB_DATABASE=packlin1_mpesa
+DB_USERNAME=packlin1_mpesa
+DB_PASSWORD=packlin1_mpesa

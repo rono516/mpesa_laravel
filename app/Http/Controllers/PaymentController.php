@@ -55,6 +55,10 @@ class PaymentController extends Controller
         ]);
     }
 
+    public function confirm_mpesa(){
+        return view('confirm_mpesa');
+    }
+
     public function store(Request $request)
     {
         $validData = $request->validate([
@@ -74,6 +78,9 @@ class PaymentController extends Controller
                     'merchant' => $response->merchant,
                     'checkout' => $response->checkout,
                 ]);
+
+
+                return redirect()->route('confirm_mpesa');
 
                 // return redirect()->route('credit.index')->with('status', [
                 //     'type' => 'alert-info',
