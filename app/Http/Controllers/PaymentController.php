@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\MpesaCallbackSaved;
 use App\Models\PaymentRequest;
 use App\Models\User;
-use App\Notifications\NewPaymentReceived;
 use App\Traits\Payments;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 
 class PaymentController extends Controller
 {
@@ -52,10 +47,11 @@ class PaymentController extends Controller
     //     return Inertia::render('Payments/Create');
     // }
 
-    public function mpesa_view(){
+    public function mpesa_view()
+    {
         $user = Auth::user();
         return view('mpesa')->with([
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -158,5 +154,29 @@ class PaymentController extends Controller
         } else {
             Log::error('STK callback was not a POST request.');
         }
+    }
+
+    public function callback_url()
+    {
+        header("Content-Type: application/json");
+
+        $response = '{
+         "ResultCode": 0,
+         "ResultDesc": "Confirmation Received Successfully"
+     }';
+
+        // DATA
+        $mpesaResponse = file_get_contents('php://input');
+
+        // log the response
+        $logFile = "M_PESAConfirmationResponse.txt";
+
+        // write to file
+        $log = fopen($logFile, "a");
+
+        fwrite($log, $mpesaResponse);
+        fclose($log);
+
+        echo $response;
     }
 }
