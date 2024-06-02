@@ -14,15 +14,15 @@
 
 
 
-                        <form method="post" action="{{ route('stk_push') }}" class="mt-6 space-y-6">
+                        <form method="post" action="{{ route('transactionStatus') }}" class="mt-6 space-y-6">
                             @csrf
 
-                            {{-- <div>
-                                <x-input-label for="phone" :value="__('Phone Number')" />
-                                <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full"
-                                     required placeholder="0792009556" autofocus autocomplete="phone" />
-                                <x-input-error class="mt-2" :messages="$errors->get('phone')" />
-                            </div> --}}
+                            <div>
+                                <x-input-label for="checkout" :value="__('Checkout ID')" />
+                                <x-text-input id="checkout" name="checkout" type="text" class="mt-1 block w-full"
+                                     required  autofocus autocomplete="checkout" />
+                                <x-input-error class="mt-2" :messages="$errors->get('checkout')" />
+                            </div>
 
                             {{-- <div>
                                 <x-input-label for="amount" :value="__('Amount')" />
@@ -35,8 +35,8 @@
 
                             <div class="flex items-center gap-4">
                                 <x-primary-button>{{ __('Confirm Payment') }}</x-primary-button>
-                    
-                                
+
+
                             </div>
 
 

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/mpesa_view', [PaymentController::class, 'mpesa_view'])->name('mpesa_view');
     Route::get('/confirm_mpesa', [PaymentController::class, 'confirm_mpesa'])->name('confirm_mpesa');
     Route::post('/stk_push', [PaymentController::class, 'store'])->name('stk_push');
+    Route::post('/transactionStatus', [PaymentController::class, 'transactionStatus'])
+        ->name('transactionStatus');
     // Route::post('/stk_push', [TransactionController::class, 'stkPushRequest'])->name('stk_push');
 });
 

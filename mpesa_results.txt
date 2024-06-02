@@ -1,0 +1,31 @@
+{
+"ResponseCode":
+"0",
+"ResponseDescription":
+"The service request has been accepted successsfully",
+"MerchantRequestID":
+"c0d2-4b9a-a71a-12bae346ef6e2465209",
+"CheckoutRequestID":
+"ws_CO_02062024200015633792009556",
+"ResultCode":
+"2001",
+"ResultDesc":
+"The initiator information is invalid."
+}
+
+// Successful Payment
+
+{
+"ResponseCode":
+"0",
+"ResponseDescription":
+"The service request has been accepted successsfully",
+"MerchantRequestID":
+"6e86-45dd-91ac-fd5d4178ab522814685",
+"CheckoutRequestID":
+"ws_CO_02062024200133829792009556",
+"ResultCode":
+"0",
+"ResultDesc":
+"The service request is processed successfully."
+}

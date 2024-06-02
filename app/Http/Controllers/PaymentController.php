@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Iankumu\Mpesa\Facades\Mpesa;
 
 class PaymentController extends Controller
 {
@@ -100,6 +101,17 @@ class PaymentController extends Controller
                 'message' => 'Could not send payment request.',
             ]);
         }
+    }
+
+
+    public function transactionStatus(Request $request){
+        $transactionCheckout = $request->input('checkout');
+
+        $response = Mpesa::stkquery($transactionCheckout);
+        $result = json_decode((string)$response);
+
+        dd($result);
+
     }
 
     /**
